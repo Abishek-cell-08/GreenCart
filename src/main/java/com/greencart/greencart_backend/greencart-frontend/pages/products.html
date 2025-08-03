@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organic Products - GreenCart</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2><a href="index.html">🌱 GreenCart</a></h2>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="products.html" class="nav-link active">Products</a>
+                <a href="#" class="nav-link" id="profileLink">Profile</a>
+                <a href="#" class="nav-link" id="cartLink">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+                <a href="#" class="nav-link" id="authLink">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Products Section -->
+    <div class="products-container">
+        <div class="container">
+            <!-- Filters -->
+            <div class="filters-section">
+                <h3>🌿 Filter Organic Products</h3>
+                <div class="filter-group">
+                    <h4>Category</h4>
+                    <select id="categoryFilter" title="Filter products by category" aria-label="Filter products by category">
+                        <option value="">All Categories</option>
+                        <option value="fruits">Fresh Fruits</option>
+                        <option value="vegetables">Organic Vegetables</option>
+                        <option value="grains">Whole Grains & Cereals</option>
+                        <option value="dairy">Organic Dairy</option>
+                        <option value="pantry">Pantry Essentials</option>
+                        <option value="beverages">Natural Beverages</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <h4>Price Range</h4>
+                    <select id="priceFilter" title="Filter products by price range" aria-label="Filter products by price range">
+                        <option value="">All Prices</option>
+                        <option value="0-50">$0 - $50</option>
+                        <option value="50-100">$50 - $100</option>
+                        <option value="100-500">$100 - $500</option>
+                        <option value="500+">$500+</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <h4>Sort By</h4>
+                    <select id="sortFilter" title="Sort products by criteria" aria-label="Sort products by criteria">
+                        <option value="name">Name</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="rating">Rating</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="search-section">
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Search products...">
+                    <button id="searchBtn" title="Search products" aria-label="Search products"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="products-main">
+                <div class="products-header">
+                    <h2>All Products</h2>
+                    <span id="productCount">Loading...</span>
+                </div>
+                <div class="products-grid" id="productsGrid">
+                    <!-- Products will be loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>GreenCart</h3>
+                    <p>Your trusted online shopping destination</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 GreenCart. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/products.js"></script>
+</body>
+</html>

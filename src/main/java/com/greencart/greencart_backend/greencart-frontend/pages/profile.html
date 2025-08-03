@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - GreenCart</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2><a href="index.html">🌱 GreenCart</a></h2>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="products.html" class="nav-link">Products</a>
+                <a href="#" class="nav-link active" id="profileLink">Profile</a>
+                <a href="#" class="nav-link" id="cartLink">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+                <a href="#" class="nav-link" id="authLink">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Profile Section -->
+    <div class="profile-container">
+        <div class="container">
+            <div class="profile-sidebar">
+                <div class="profile-info">
+                    <div class="profile-avatar">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <h3 id="userName">John Doe</h3>
+                    <p id="userEmail">john.doe@example.com</p>
+                </div>
+                <nav class="profile-nav">
+                    <a href="#" class="profile-nav-link active" data-tab="personal">
+                        <i class="fas fa-user"></i> Personal Information
+                    </a>
+                    <a href="#" class="profile-nav-link" data-tab="orders">
+                        <i class="fas fa-box"></i> Order History
+                    </a>
+                    <a href="#" class="profile-nav-link" data-tab="addresses">
+                        <i class="fas fa-map-marker-alt"></i> Addresses
+                    </a>
+                    <a href="#" class="profile-nav-link" data-tab="wishlist">
+                        <i class="fas fa-heart"></i> Wishlist
+                    </a>
+                    <a href="#" class="profile-nav-link" data-tab="settings">
+                        <i class="fas fa-cog"></i> Settings
+                    </a>
+                </nav>
+            </div>
+
+            <div class="profile-content">
+                <!-- Personal Information Tab -->
+                <div class="profile-tab active" id="personal">
+                    <h2>Personal Information</h2>
+                    <form id="personalInfoForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name:</label>
+                                <input type="text" id="firstName" name="firstName" value="John">
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name:</label>
+                                <input type="text" id="lastName" name="lastName" value="Doe">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" value="john.doe@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone:</label>
+                            <input type="tel" id="phone" name="phone" value="+1234567890">
+                        </div>
+                        <div class="form-group">
+                            <label for="dateOfBirth">Date of Birth:</label>
+                            <input type="date" id="dateOfBirth" name="dateOfBirth">
+                        </div>
+                        <button type="submit" class="save-btn">Save Changes</button>
+                    </form>
+                </div>
+
+                <!-- Order History Tab -->
+                <div class="profile-tab" id="orders">
+                    <h2>Order History</h2>
+                    <div class="orders-filter">
+                        <select id="orderFilter" title="Filter orders by status">
+                            <option value="all">All Orders</option>
+                            <option value="pending">Pending</option>
+                            <option value="processing">Processing</option>
+                            <option value="shipped">Shipped</option>
+                            <option value="delivered">Delivered</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                        <input type="text" id="orderSearch" placeholder="Search orders...">
+                    </div>
+                    <div class="orders-list" id="ordersList">
+                        <!-- Orders will be loaded dynamically -->
+                        <div class="empty-state" id="emptyOrders">
+                            <i class="fas fa-box-open"></i>
+                            <h3>No orders yet</h3>
+                            <p>Start shopping to see your orders here!</p>
+                            <a href="products.html" class="btn btn-primary">Browse Products</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Addresses Tab -->
+                <div class="profile-tab" id="addresses">
+                    <h2>Saved Addresses</h2>
+                    <div class="addresses-header">
+                        <button class="add-address-btn" id="addAddressBtn">
+                            <i class="fas fa-plus"></i> Add New Address
+                        </button>
+                        <div class="addresses-count">
+                            <span id="addressCount">0</span> saved addresses
+                        </div>
+                    </div>
+                    <div class="addresses-list" id="addressesList">
+                        <!-- Addresses will be loaded dynamically -->
+                        <div class="empty-state" id="emptyAddresses">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <h3>No saved addresses</h3>
+                            <p>Add addresses for faster checkout</p>
+                            <button class="btn btn-primary" onclick="showAddAddressForm()">
+                                <i class="fas fa-plus"></i> Add Your First Address
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Add Address Modal -->
+                    <div class="modal" id="addressModal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3>Add New Address</h3>
+                                <span class="close" onclick="closeAddressModal()">&times;</span>
+                            </div>
+                            <form id="addAddressForm">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="addressType">Address Type:</label>
+                                        <select id="addressType" name="type" required>
+                                            <option value="home">Home</option>
+                                            <option value="work">Work</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>
+                                            <input type="checkbox" id="isDefault"> Set as default
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="addressFirstName">First Name:</label>
+                                        <input type="text" id="addressFirstName" name="firstName" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="addressLastName">Last Name:</label>
+                                        <input type="text" id="addressLastName" name="lastName" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="addressLine1">Address Line 1:</label>
+                                    <input type="text" id="addressLine1" name="address" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="addressLine2">Address Line 2 (Optional):</label>
+                                    <input type="text" id="addressLine2" name="address2">
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="addressCity">City:</label>
+                                        <input type="text" id="addressCity" name="city" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="addressState">State:</label>
+                                        <input type="text" id="addressState" name="state" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="addressZip">ZIP Code:</label>
+                                        <input type="text" id="addressZip" name="zipCode" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="addressPhone">Phone Number:</label>
+                                    <input type="tel" id="addressPhone" name="phone" required>
+                                </div>
+                                <div class="modal-actions">
+                                    <button type="button" class="btn btn-secondary" onclick="closeAddressModal()">Cancel</button>
+                                    <button type="submit" class="btn btn-primary">Save Address</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wishlist Tab -->
+                <div class="profile-tab" id="wishlist">
+                    <h2>My Wishlist</h2>
+                    <div class="wishlist-header">
+                        <div class="wishlist-count">
+                            <span id="wishlistCount">0</span> items in wishlist
+                        </div>
+                        <div class="wishlist-actions">
+                            <button class="btn btn-secondary" id="clearWishlist">
+                                <i class="fas fa-trash"></i> Clear All
+                            </button>
+                            <button class="btn btn-primary" id="addAllToCart">
+                                <i class="fas fa-shopping-cart"></i> Add All to Cart
+                            </button>
+                        </div>
+                    </div>
+                    <div class="wishlist-grid" id="wishlistGrid">
+                        <!-- Wishlist items will be loaded dynamically -->
+                        <div class="empty-state" id="emptyWishlist">
+                            <i class="fas fa-heart"></i>
+                            <h3>Your wishlist is empty</h3>
+                            <p>Save items you love for later!</p>
+                            <a href="products.html" class="btn btn-primary">
+                                <i class="fas fa-search"></i> Discover Products
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Tab -->
+                <div class="profile-tab" id="settings">
+                    <h2>Account Settings</h2>
+                    
+                    <!-- Security Settings -->
+                    <div class="settings-section">
+                        <h3><i class="fas fa-shield-alt"></i> Security</h3>
+                        <form id="passwordForm">
+                            <div class="form-group">
+                                <label for="currentPassword">Current Password:</label>
+                                <input type="password" id="currentPassword" name="currentPassword" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="newPassword">New Password:</label>
+                                <input type="password" id="newPassword" name="newPassword" required minlength="8">
+                                <small>Password must be at least 8 characters long</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmPassword">Confirm New Password:</label>
+                                <input type="password" id="confirmPassword" name="confirmPassword" required>
+                            </div>
+                            <button type="submit" class="save-btn">Update Password</button>
+                        </form>
+                        
+                        <div class="two-factor-auth">
+                            <h4>Two-Factor Authentication</h4>
+                            <p>Add an extra layer of security to your account</p>
+                            <button class="btn btn-outline" id="enable2FA">
+                                <i class="fas fa-mobile-alt"></i> Enable 2FA
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Notification Settings -->
+                    <div class="settings-section">
+                        <h3><i class="fas fa-bell"></i> Notifications</h3>
+                        <div class="notification-settings">
+                            <div class="notification-group">
+                                <h4>Order Updates</h4>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="emailNotifications" checked>
+                                    <span>Email notifications for order updates</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="smsNotifications">
+                                    <span>SMS notifications for order updates</span>
+                                </label>
+                            </div>
+                            
+                            <div class="notification-group">
+                                <h4>Marketing</h4>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="promotionalEmails" checked>
+                                    <span>Promotional emails and offers</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="newsletterEmails" checked>
+                                    <span>Weekly newsletter</span>
+                                </label>
+                            </div>
+                            
+                            <div class="notification-group">
+                                <h4>Product Updates</h4>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="stockAlerts">
+                                    <span>Stock availability alerts</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="priceDropAlerts">
+                                    <span>Price drop notifications</span>
+                                </label>
+                            </div>
+                        </div>
+                        <button class="save-btn" id="saveNotificationSettings">Save Preferences</button>
+                    </div>
+                    
+                    <!-- Privacy Settings -->
+                    <div class="settings-section">
+                        <h3><i class="fas fa-user-shield"></i> Privacy</h3>
+                        <div class="privacy-settings">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="profileVisibility" checked>
+                                <span>Make my profile visible to other users</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="orderHistory">
+                                <span>Show my purchase history in recommendations</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="dataCollection" checked>
+                                <span>Allow data collection for personalized experience</span>
+                            </label>
+                        </div>
+                        <button class="save-btn" id="savePrivacySettings">Save Privacy Settings</button>
+                    </div>
+                    
+                    <!-- Account Management -->
+                    <div class="settings-section danger-zone">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Account Management</h3>
+                        <div class="account-actions">
+                            <button class="btn btn-outline" id="exportData">
+                                <i class="fas fa-download"></i> Export My Data
+                            </button>
+                            <button class="btn btn-danger" id="deactivateAccount">
+                                <i class="fas fa-user-times"></i> Deactivate Account
+                            </button>
+                            <button class="btn btn-danger" id="deleteAccount">
+                                <i class="fas fa-trash"></i> Delete Account
+                            </button>
+                        </div>
+                        <p class="warning-text">
+                            <i class="fas fa-warning"></i> 
+                            Account deletion is permanent and cannot be undone.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>GreenCart</h3>
+                    <p>Your trusted online shopping destination</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 GreenCart. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/profile.js"></script>
+    
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenCart - Organic Groceries & Natural Products</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>🌱 GreenCart</h2>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="products.html" class="nav-link">Products</a>
+                <a href="#" class="nav-link" id="profileLink">Profile</a>
+                <a href="#" class="nav-link" id="cartLink">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+                <a href="#" class="nav-link" id="authLink">Login</a>
+            </div>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Welcome to GreenCart</h1>
+            <p>Your trusted source for fresh, organic groceries and natural products</p>
+            <button class="cta-button" onclick="window.location.href='products.html'">Shop Organic</button>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="featured-products">
+        <div class="container">
+            <h2>🌿 Featured Organic Products</h2>
+            <div class="products-grid" id="featuredProducts">
+                <!-- Products will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+   <!-- Categories -->
+<section class="categories">
+    <div class="container">
+        <h2>Shop by Category</h2>
+        <div class="categories-grid">
+            <div class="category-card" onclick="filterByCategory('fruits')">
+                <i class="fas fa-apple-alt"></i>
+                <h3>Fresh Fruits</h3>
+            </div>
+            <div class="category-card" onclick="filterByCategory('vegetables')">
+                <i class="fas fa-carrot"></i>
+                <h3>Organic Vegetables</h3>
+            </div>
+            <div class="category-card" onclick="filterByCategory('grains')">
+                <i class="fas fa-bread-slice"></i>
+                <h3>Whole Grains & Cereals</h3>
+            </div>
+            <div class="category-card" onclick="filterByCategory('dairy')">
+                <i class="fas fa-cheese"></i>
+                <h3>Organic Dairy</h3>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>GreenCart</h3>
+                    <p>Your trusted online shopping destination</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Track Order</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 GreenCart. All rights reserved.</p>
+                <p><a href="admin-login.html" style="color: #666; font-size: 0.8rem;">Admin Panel</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/products.js"></script>
+</body>
+</html>
